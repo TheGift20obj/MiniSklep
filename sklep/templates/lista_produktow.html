@@ -1,0 +1,6 @@
+<h1>Lista produktów</h1>
+<ul>
+    {% for produkt in produkty %}
+        <li>{{ produkt.nazwa }} - {{ produkt.cena }} PLN</li>
+    {% endfor %}
+</ul>
