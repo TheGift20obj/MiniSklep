@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>{% if produkt %} Edytuj Produkt {% else %} Dodaj Produkt {% endif %}</h2>
+  
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% if produkt %} Zaktualizuj {% else %} Dodaj {% endif %}</button>
+  </form>
+
+  {% if produkt %}
+    <a href="{% url 'usun_produkt' produkt.id %}">Usuń Produkt</a>
+  {% endif %}
+{% endblock %}
