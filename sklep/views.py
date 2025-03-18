@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Produkt
 from .forms import ProduktForm
 
@@ -16,7 +16,7 @@ def dodaj_edycja_produkt(request, produkt_id=None):
         form = ProduktForm(request.POST, request.FILES, instance=produkt)
         if form.is_valid():
             form.save()
-            return redirect('lista_produktow')  # Zmienna 'lista_produktow' to widok, który wyświetla wszystkie produkty
+            return redirect('lista_produktow')
     else:
         form = ProduktForm(instance=produkt)
 

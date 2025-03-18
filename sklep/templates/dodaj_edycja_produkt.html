@@ -1,15 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>{% if produkt %} Edytuj Produkt {% else %} Dodaj Produkt {% endif %}</h2>
-  
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">{% if produkt %} Zaktualizuj {% else %} Dodaj {% endif %}</button>
-  </form>
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">
+      {% if produkt %}
+        Edytuj Produkt
+      {% else %}
+        Dodaj Produkt
+      {% endif %}
+    </h2>
 
-  {% if produkt %}
-    <a href="{% url 'usun_produkt' produkt.id %}">Usuń Produkt</a>
-  {% endif %}
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <form method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            {{ form.as_p }}
+          </div>
+
+          <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary btn-lg">
+              {% if produkt %}
+                Zaktualizuj
+              {% else %}
+                Dodaj
+              {% endif %}
+            </button>
+          </div>
+        </form>
+
+        {% if produkt %}
+          <div class="mt-4 text-center">
+            <a href="{% url 'usun_produkt' produkt.id %}" class="btn btn-danger btn-lg">Usuń Produkt</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
 {% endblock %}
