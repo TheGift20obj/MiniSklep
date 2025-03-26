@@ -1,40 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="container mt-5">
-    <h2 class="text-center mb-4">
-      {% if produkt %}
-        Edytuj Produkt
-      {% else %}
-        Dodaj Produkt
-      {% endif %}
-    </h2>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10 col-sm-12">
+      <div class="card shadow-lg border-light">
+        <div class="card-header bg-primary text-white text-center py-3">
+          <h3>
+            {% if produkt %}
+              Edytuj Produkt
+            {% else %}
+              Dodaj Produkt
+            {% endif %}
+          </h3>
+        </div>
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              {{ form.as_p }}
+            </div>
 
-    <div class="card shadow-sm">
-      <div class="card-body">
-        <form method="post">
-          {% csrf_token %}
-          <div class="form-group">
-            {{ form.as_p }}
-          </div>
+            <div class="form-group text-center mt-4">
+              <button type="submit" class="btn btn-primary btn-lg">
+                {% if produkt %}
+                  Zaktualizuj
+                {% else %}
+                  Dodaj
+                {% endif %}
+              </button>
 
-          <div class="form-group text-center">
-            <button type="submit" class="btn btn-primary btn-lg">
               {% if produkt %}
-                Zaktualizuj
-              {% else %}
-                Dodaj
+              <a href="{% url 'usun_produkt' produkt.id %}" class="btn btn-danger btn-lg mx-3">Usuń Produkt</a>
               {% endif %}
-            </button>
-          </div>
-        </form>
-
-        {% if produkt %}
-          <div class="mt-4 text-center">
-            <a href="{% url 'usun_produkt' produkt.id %}" class="btn btn-danger btn-lg">Usuń Produkt</a>
-          </div>
-        {% endif %}
+              <a href="{% url 'lista_produktow' %}" class="btn btn-secondary btn-lg">Anuluj</a>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
+</div>
 {% endblock %}
