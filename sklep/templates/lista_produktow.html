@@ -19,6 +19,7 @@
             <th>Nazwa</th>
             <th>Opis</th>
             <th>Cena</th>
+            <th>Obrazek</th> <!-- Dodana kolumna do wyświetlania obrazków -->
             <th>Akcje</th>
           </tr>
         </thead>
@@ -33,6 +34,14 @@
               <td>{{ produkt.nazwa }}</td>
               <td>{{ produkt.opis }}</td>
               <td>{{ produkt.cena }} zł</td>
+              <td>
+                {% if produkt.obrazek %}
+                  <img src="{{ produkt.obrazek.url }}" alt="{{ produkt.nazwa }}" width="100">
+                {% else %}
+                  Brak obrazka
+                {% endif %}
+              </td>
+
               <td>
                 <a href="{% url 'dodaj_edycja_produkt' produkt.id %}" class="btn btn-warning btn-sm">
                   <i class="fas fa-edit"></i> Edytuj
