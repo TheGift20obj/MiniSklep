@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2 class="my-4">Lista produktów</h2>
+
+  <form method="post" action="{% url 'usun_wybrane_produkty' %}">
+    {% csrf_token %}
+
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th>Nazwa</th>
+            <th>Opis</th>
+            <th>Cena netto</th>
+            <th>Cena brutto</th>
+            <th>Ilość</th>
+            <th>Obrazek</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for produkt in produkty %}
+            <tr>
+              <td>{{ produkt.nazwa }}</td>
+              <td>{{ produkt.opis }}</td>
+              <td>{{ produkt.cena_netto }} zł</td>
+              <td>{{ produkt.cena_brutto }} zł</td>
+              <td>{{ produkt.ilosc }}</td>
+              <td>
+                {% if produkt.obrazek %}
+                  <img src="{{ produkt.obrazek.url }}" alt="{{ produkt.nazwa }}" width="100">
+                {% else %}
+                  Brak obrazka
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </form>
+{% endblock %}
